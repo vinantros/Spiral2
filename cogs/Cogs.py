@@ -31,7 +31,8 @@ class Cogs(commands.Cog): # create a class for our cog that inherits from comman
             await ctx.send(f'Added {new_dev.name} to developer list.')
         else:
             await ctx.send(f'{new_dev.name} is already in developer list.')
-            
+     
+    # remove_developer command       
     @commands.command(name='remove_developer')
     async def remove_developer(self, ctx, dev: discord.User):
         self.c.execute("SELECT id FROM developers WHERE id = ?", (str(dev.id),))
@@ -44,7 +45,7 @@ class Cogs(commands.Cog): # create a class for our cog that inherits from comman
             await ctx.send(f'{dev.name} is not in developer list.')
 
     
-    @discord.slash_command() # we can also add application commands
+    @discord.slash_command()
     async def youtube(self, ctx, url: str):
         from features import search
         if url.startswith("https://www.youtube.com/watch?v=") or url.startswith("https://youtu.be/"):
@@ -59,8 +60,8 @@ class Cogs(commands.Cog): # create a class for our cog that inherits from comman
     async def greet(self, ctx, member: discord.Member):
         await ctx.respond(f'{ctx.author.mention} says hello to {member.mention}!')
 
-    @commands.Cog.listener() # we can add event listeners to our cog
-    async def on_member_join(self, member): # this is called when a member joins the server
+    @commands.Cog.listener() # Event listeners
+    async def on_member_join(self, member): # This is called when a member joins the server
         await member.send('Welcome to hell')
 
     def cog_unload(self):
