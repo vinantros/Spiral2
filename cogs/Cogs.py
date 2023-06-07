@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import sqlite3
+from io import BytesIO
 
 class Cogs(commands.Cog): # create a class for our cog that inherits from commands.Cog
     # this class is used to create a cog, which is a module that can be added to the bot
@@ -59,6 +60,20 @@ class Cogs(commands.Cog): # create a class for our cog that inherits from comman
     @discord.user_command()
     async def greet(self, ctx, member: discord.Member):
         await ctx.respond(f'{ctx.author.mention} says hello to {member.mention}!')
+        
+        
+    @discord.slash_command()
+    async def imagine(ctx, first: str):
+        prompt = [first]
+        from features import imagine
+        img_data = imagine(prompt)
+        if img_data is None:
+            await ctx.respond("An error occurred while generating the image.")
+        else:
+            buffer = BytesIO(img_data)
+            buffer.seek(0)
+            file = discord.File(buffer, filename="imagine.jpg")
+            await ctx.respond(f"Imagine: {first}", file=file)
 
     @commands.Cog.listener() # Event listeners
     async def on_member_join(self, member): # This is called when a member joins the server
