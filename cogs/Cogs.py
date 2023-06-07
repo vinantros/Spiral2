@@ -70,10 +70,7 @@ class Cogs(commands.Cog): # create a class for our cog that inherits from comman
         if img_data is None:
             await ctx.respond("An error occurred while generating the image.")
         else:
-            buffer = BytesIO(img_data)
-            buffer.seek(0)
-            file = discord.File(buffer, filename="imagine.jpg")
-            await ctx.respond(f"Imagine: {first}", file=file)
+            await ctx.channel.send(file=discord.File(img_data))
 
     @commands.Cog.listener() # Event listeners
     async def on_member_join(self, member): # This is called when a member joins the server
