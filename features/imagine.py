@@ -1,4 +1,5 @@
 from imaginepy import Imagine, Style, Ratio
+from io import BytesIO
 
 def imagine(prompt):
     imagine = Imagine()
@@ -20,8 +21,8 @@ def imagine(prompt):
         return
 
     try:
-        with open("example.jpeg", mode="wb") as img_file:
-            pic = img_file.write(img_data)
-            return pic
+        # Use BytesIO to store the image data in memory
+        img_file = BytesIO(img_data)
+        return img_file
     except Exception as e:
         print(f"An error occurred while writing the image to file: {e}")
