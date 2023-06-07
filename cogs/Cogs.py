@@ -63,8 +63,7 @@ class Cogs(commands.Cog): # create a class for our cog that inherits from comman
         
         
     @discord.slash_command()
-    async def imagine(self, ctx, first: str):
-        prompt = [first]
+    async def imagine(self, ctx, prompt: str):
         from features import imagine
         img_data = imagine.imagine(prompt)
         if img_data is None:
