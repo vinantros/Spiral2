@@ -4,17 +4,15 @@ import sqlite3
 from io import BytesIO
 
 class Cogs(commands.Cog): # create a class for our cog that inherits from commands.Cog
-    # this class is used to create a cog, which is a module that can be added to the bot
-    
+    # this class is used to create a cog
     def __init__(self, bot): # this is a special method that is called when the cog is loaded
         self.bot = bot
         self.conn = sqlite3.connect('developers.db')
         self.c = self.conn.cursor()
-
+        
     @commands.command() # creates a prefixed command
     async def hello(self, ctx): # all methods now must have both self and ctx parameters
         await ctx.send('Hello!')
-
 
     @discord.slash_command()
     async def add_developer(self, ctx, new_dev: discord.User):
@@ -45,7 +43,6 @@ class Cogs(commands.Cog): # create a class for our cog that inherits from comman
         else:
             await ctx.send(f'{dev.name} is not in developer list.')
 
-    
     @discord.slash_command()
     async def youtube(self, ctx, url: str):
         from features import search
@@ -60,14 +57,14 @@ class Cogs(commands.Cog): # create a class for our cog that inherits from comman
     @discord.user_command()
     async def greet(self, ctx, member: discord.Member):
         await ctx.respond(f'{ctx.author.mention} says hello to {member.mention}!')
-        
-        
+          
     @discord.slash_command()
     async def imagine(self, ctx, prompt: str):
         from features import imagine
         await ctx.respond("Generating image...")
         
         img_data = imagine.imagine(prompt)
+        
         if img_data is None:
             await ctx.respond("An error occurred while generating the image.")
         else:

@@ -24,7 +24,7 @@ conversation = ConversationChain(
     memory=ConversationEntityMemory(llm=llm))
 
 # define function to predict output based on input topic
-def ai(topic):
+def ai_chat(topic):
     output = conversation.predict(input=topic)
     return output
 
@@ -43,7 +43,8 @@ class SpiralBot(commands.Bot):
         print(message.author.id)
         # create cursor for database connection
         c = self.conn.cursor()
-        if message.content.startswith('spiral'):
+        
+        if message.content.lower().startswith('spiral'):
             # check if user is authorized to use bot
             c.execute("SELECT id FROM developers WHERE id = ?", (str(message.author.id),))
             result = c.fetchone()
@@ -57,8 +58,8 @@ class SpiralBot(commands.Bot):
                 await message.channel.send(response)
             else:
                 # predict output and send response to Discord channel
-                topic = message.content.replace("spiral ", "")
-                answer = ai(topic)
+                topic = message.content.lower().replace("spiral ", "")
+                answer = ai_chat(topic)
                 await message.channel.send(answer)
         # process commands
         await self.process_commands(message)

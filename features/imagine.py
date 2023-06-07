@@ -2,6 +2,15 @@ from imaginepy import Imagine, Style, Ratio
 from io import BytesIO
 
 def imagine(prompt):
+    """
+    Generate an image based on the given prompt using the Imagine library. 
+    
+    Args:
+    prompt (str): The text prompt to use for generating the image.
+    
+    Returns:
+    BytesIO: A file containing the generated image data, stored in memory. None is returned if there was an error while generating or upscaling the image.
+    """
     imagine = Imagine()
 
     img_data = imagine.sdprem(
