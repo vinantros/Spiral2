@@ -2,7 +2,7 @@ from imaginepy import Imagine, Style, Ratio
 
 def imagine(prompt):
 
-    img_data = imagine.sdprem(
+    img_data = Imagine.sdprem(
         prompt=prompt,
         style=Style.ANIME_V2,
         ratio=Ratio.RATIO_16X9
