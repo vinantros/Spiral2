@@ -1,5 +1,4 @@
 decorator==5.1.1
-discord.py==2.2.3
 openai==0.27.5
 openapi-schema-pydantic==1.2.4
 opengpt4==0.1.8
