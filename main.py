@@ -48,7 +48,7 @@ class SpiralBot(commands.Bot):
         result = c.fetchone()
         is_developer = result is not None
 
-        if is_developer and message.content.lower().startswith('jailbreak.chat'):
+        if is_developer and message.content.lower().startswith('spiral'):
             member_name = message.author.name
             member_message = message.content
 
