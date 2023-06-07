@@ -1,7 +1,6 @@
 from imaginepy import Imagine, Style, Ratio
 
 def imagine(prompt):
-    imagine = Imagine()
 
     img_data = imagine.sdprem(
         prompt=prompt,
@@ -21,9 +20,7 @@ def imagine(prompt):
 
     try:
         with open("example.jpeg", mode="wb") as img_file:
-            img_file.write(img_data)
+            pic = img_file.write(img_data)
+            return pic
     except Exception as e:
         print(f"An error occurred while writing the image to file: {e}")
-
-if __name__ == "__main__":
-    imagine()
