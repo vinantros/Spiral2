@@ -66,7 +66,7 @@ class Cogs(commands.Cog): # create a class for our cog that inherits from comman
     async def imagine(self, ctx, first: str):
         prompt = [first]
         from features import imagine
-        img_data = imagine(prompt)
+        img_data = imagine.imagine(prompt)
         if img_data is None:
             await ctx.respond("An error occurred while generating the image.")
         else:
