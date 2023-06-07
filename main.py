@@ -9,8 +9,7 @@ from langchain.chains import ConversationChain
 from langchain.memory import ConversationEntityMemory
 
 # load environment variables
-load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
+TOKEN = os.environ("DISCORD_BOT_TOKEN")
 
 # set up Discord bot intents
 intents = discord.Intents.all()

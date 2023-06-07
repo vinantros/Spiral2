@@ -8,7 +8,6 @@ import re
 from langchain import OpenAI, ConversationChain, LLMChain, PromptTemplate
 from langchain.memory import ConversationBufferWindowMemory
 
-load_dotenv()
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
 def jailbreak_chat(username, message):

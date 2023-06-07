@@ -8,7 +8,7 @@ from youtube_transcript_api import TranscriptsDisabled
 from youtubesearchpython import VideosSearch
 import os
 
-AI = os.getenv('OPENAI_API_KEY')
+AI = os.environ["OPENAI_API_KEY"]
 
 def youtube_search(message):
     """
