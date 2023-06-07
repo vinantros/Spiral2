@@ -44,23 +44,24 @@ class SpiralBot(commands.Bot):
         # create cursor for database connection
         c = self.conn.cursor()
         
-        if message.content.lower().startswith('spiral'):
-            # check if user is authorized to use bot
-            c.execute("SELECT id FROM developers WHERE id = ?", (str(message.author.id),))
-            result = c.fetchone()
-            if result is not None:
-                member_name = message.author.name
-                member_message = message.content
+        c.execute("SELECT id FROM developers WHERE id = ?", (str(message.author.id),))
+        result = c.fetchone()
+        is_developer = result is not None
 
-                # import feature to handle authorized user's message
-                from features import jailbreak
-                response = jailbreak.jailbreak_chat(member_name, member_message)
-                await message.channel.send(response)
-            else:
-                # predict output and send response to Discord channel
-                topic = message.content.lower().replace("spiral ", "")
-                answer = ai_chat(topic)
-                await message.channel.send(answer)
+        if is_developer and message.content.lower().startswith('jailbreak.chat'):
+            member_name = message.author.name
+            member_message = message.content
+
+            # import feature to handle authorized user's message
+            from features import jailbreak
+            response = jailbreak.jailbreak_chat(member_name, member_message)
+            await message.channel.send(response)
+
+        elif message.content.lower().startswith('spiral'):
+            # predict output and send response to Discord channel
+            topic = message.content.lower().replace("spiral ", "")
+            answer = ai_chat(topic)
+            await message.channel.send(answer)
         # process commands
         await self.process_commands(message)
 
