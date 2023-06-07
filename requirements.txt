@@ -16,4 +16,5 @@ SQLAlchemy==2.0.13
 tiktoken==0.4.0
 youtube-search-python==1.6.6
 youtube-transcript-api==0.6.0
+langchain==0.0.170
 
