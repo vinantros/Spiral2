@@ -65,10 +65,13 @@ class Cogs(commands.Cog): # create a class for our cog that inherits from comman
     @discord.slash_command()
     async def imagine(self, ctx, prompt: str):
         from features import imagine
+        message = await ctx.respond("Generating image...")
+        
         img_data = imagine.imagine(prompt)
         if img_data is None:
             await ctx.respond("An error occurred while generating the image.")
         else:
+            await message.delete()
             await ctx.channel.send(file=discord.File(img_data, filename='image.jpeg'))
 
     @commands.Cog.listener() # Event listeners
