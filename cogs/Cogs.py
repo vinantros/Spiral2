@@ -14,7 +14,7 @@ class Cogs(commands.Cog): # create a class for our cog that inherits from comman
     async def hello(self, ctx): # all methods now must have both self and ctx parameters
         await ctx.send('Hello!')
 
-    @discord.slash_command()
+    @discord.slash_command(help='Adds a developer to the developer list.')
     async def add_developer(self, ctx, new_dev: discord.User):
         # Check if the user executing the command is a developer
         self.c.execute("SELECT id FROM developers WHERE id = ?", (str(ctx.author.id),))
@@ -32,7 +32,7 @@ class Cogs(commands.Cog): # create a class for our cog that inherits from comman
             await ctx.send(f'{new_dev.name} is already in developer list.')
      
     # remove_developer command       
-    @commands.command(name='remove_developer')
+    @discord.slash_command(help='Removes a developer from the developer list.')
     async def remove_developer(self, ctx, dev: discord.User):
         self.c.execute("SELECT id FROM developers WHERE id = ?", (str(dev.id),))
         result = self.c.fetchone()
@@ -43,7 +43,7 @@ class Cogs(commands.Cog): # create a class for our cog that inherits from comman
         else:
             await ctx.send(f'{dev.name} is not in developer list.')
 
-    @discord.slash_command()
+    @discord.slash_command(help='Summary for a YouTube video.')
     async def youtube(self, ctx, url: str):
         from features import search
         if url.startswith("https://www.youtube.com/watch?v=") or url.startswith("https://youtu.be/"):
@@ -58,7 +58,7 @@ class Cogs(commands.Cog): # create a class for our cog that inherits from comman
     async def greet(self, ctx, member: discord.Member):
         await ctx.respond(f'{ctx.author.mention} says hello to {member.mention}!')
           
-    @discord.slash_command()
+    @discord.slash_command(help='Generates an image based on a prompt.')
     async def imagine(self, ctx, prompt: str):
         from features import imagine
         await ctx.respond("Generating image...")
