@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import sqlite3
 from io import BytesIO
+import asyncio
 
 class Cogs(commands.Cog): # create a class for our cog that inherits from commands.Cog
     # this class is used to create a cog
@@ -62,9 +63,10 @@ class Cogs(commands.Cog): # create a class for our cog that inherits from comman
     async def imagine(self, ctx, prompt: str):
         from features import imagine
         await ctx.respond("Generating image...")
-        
-        img_data = imagine.imagine(prompt)
-        
+
+        loop = asyncio.get_event_loop()
+        img_data = await loop.run_in_executor(None, imagine.imagine, prompt)
+            
         if img_data is None:
             await ctx.respond("An error occurred while generating the image.")
         else:
