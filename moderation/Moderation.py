@@ -27,6 +27,7 @@ class Moderation(commands.Cog):
         await member.add_roles(muted_role)
         await ctx.send(f'{member} has been muted.')
         
+        
     @commands.command()
     async def create_channel(self, ctx, channel_name: str):
         new_channel = await ctx.guild.create_text_channel(channel_name)
