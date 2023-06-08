@@ -15,7 +15,7 @@ def imagine(prompt):
 
     img_data = imagine.sdprem(
         prompt=prompt,
-        style=Style.REALISTIC,
+        style=Style.IMAGINE_V4_Beta,
         ratio=Ratio.RATIO_16X9
     )
 
