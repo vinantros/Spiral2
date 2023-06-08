@@ -72,7 +72,7 @@ class SpiralBot(commands.Bot):
 # instantiate custom bot object and run bot
 bot = SpiralBot(command_prefix='!', intents=intents)
 bot.load_extension('cogs.Cogs')
-bot.load_extension('cogs.Moderation')
+bot.load_extension('moderation.Moderation')
 bot.run(TOKEN)
 
 
