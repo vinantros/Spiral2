@@ -13,11 +13,11 @@ class Cogs(commands.Cog):
     def cog_unload(self):
         self.conn.close()
 
-    @commands.command()
+    @discord.slash_command()
     async def hello(self, ctx):
         await ctx.send('Hello!')
 
-    @commands.command(description='Adds a developer to the developer list.')
+    @discord.slash_command(description='Adds a developer to the developer list.')
     async def add_developer(self, ctx, new_dev: discord.User):
         # Check if the user executing the command is a developer
         self.c.execute("SELECT id FROM developers WHERE id = ?", (str(ctx.author.id),))
@@ -35,7 +35,7 @@ class Cogs(commands.Cog):
         else:
             await ctx.send(f'{new_dev.name} is already in the developer list.')
 
-    @commands.command(description='Removes a developer from the developer list.')
+    @discord.slash_command(description='Removes a developer from the developer list.')
     async def remove_developer(self, ctx, dev: discord.User):
         self.c.execute("SELECT id FROM developers WHERE id = ?", (str(dev.id),))
         result = self.c.fetchone()
@@ -46,7 +46,7 @@ class Cogs(commands.Cog):
         else:
             await ctx.send(f'{dev.name} is not in the developer list.')
 
-    @commands.command(description='Summary for a YouTube video.')
+    @discord.slash_command(description='Summary for a YouTube video.')
     async def youtube(self, ctx, url: str):
         if url.startswith("https://www.youtube.com/watch?v=") or url.startswith("https://youtu.be/"):
             await ctx.send("Watching video...")
@@ -56,11 +56,11 @@ class Cogs(commands.Cog):
         response = search.youtube(url)
         await ctx.send(response)
 
-    @commands.command()
+    @discord.slash_command()
     async def greet(self, ctx, member: discord.Member):
         await ctx.send(f'{ctx.author.mention} says hello to {member.mention}!')
 
-    @commands.command(description='Generates an image based on a prompt.')
+    @discord.slash_command(description='Generates an image based on a prompt.')
     async def imagine(self, ctx, prompt: str):
         await ctx.send("Generating image...")
 
