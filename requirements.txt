@@ -1,5 +1,5 @@
 py-cord==2.4.1
-imaginepy==1.1.0
+imaginepy==2.0.1
 langchain==0.0.192
 openai==0.27.5
 python-dotenv==1.0.0
