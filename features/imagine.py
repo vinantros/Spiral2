@@ -1,4 +1,4 @@
-from imaginepy import Imagine, Style, Ratio
+from imaginepy import Imagine, Style, Ratio, Model
 from io import BytesIO
 
 def imagine(prompt):
@@ -14,9 +14,8 @@ def imagine(prompt):
     imagine = Imagine()
 
     img_data = imagine.sdprem(
-        prompt=prompt,
-        style=Style.V4_BETA,
-        ratio=Ratio.RATIO_16X9
+        prompt="f{prompt}",
+        model=Model.V4_BETA
     )
 
     if img_data is None:
