@@ -57,7 +57,7 @@ class SpiralBot(commands.Bot):
             response = jailbreak.jailbreak_chat(member_name, member_message)
             await message.channel.send(response)
 
-        elif message.content.lower().startswith('spiral'):
+        elif not is_developer and message.content.lower().startswith('spiral'):
             # predict output and send response to Discord channel
             topic = message.content.lower().replace("spiral ", "")
             answer = ai_chat(topic)
